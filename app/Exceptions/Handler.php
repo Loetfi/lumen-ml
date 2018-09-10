@@ -8,6 +8,7 @@ use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Laravel\Lumen\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use App\Helpers\Api;
 
 class Handler extends ExceptionHandler
 {
@@ -45,6 +46,11 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
-        return parent::render($request, $e);
+        $status   = false;
+        $httpcode = 400;
+        $data     = 'Method Not Allowed';  
+        $errorMsg = null;
+        // return parent::render($request, $e);
+        return response()->json(Api::format($status, $data, $errorMsg), $httpcode); 
     }
 }
