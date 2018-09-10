@@ -11,8 +11,11 @@
 |
 */
 
+use App\Helpers\Api;
+
 $router->get('/', function () use ($router) {
-    return $router->app->version();
+    $message = 'Selamat datang di pembelajaran Lumen';
+    return response()->json(Api::format(200, $router->app->version(), $message), 200);
 });
 
 $router->get('/log', 'ExampleController@index');
